@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat Application</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>Chat Application</h1>
+
+        <!-- List of users -->
+        <ul>
+            <li v-for="user in users" :key="user.id">
+                <button @click="startChat(user)">{{ user.username }}</button>
+            </li>
+        </ul>
+
+        <!-- Chat section -->
+        <div v-if="selectedUser">
+            <h2>Chat with {{ selectedUser.username }}</h2>
+            <div id="messages">
+                <div v-for="(message, index) in messages" :key="index">
+                    <strong>{{ message.sender }}:</strong> {{ message.text }}
+                </div>
+            </div>
+            <textarea v-model="messageText"></textarea>
+            <button @click="sendMessage">Send</button>
+        </div>
+    </div>
+
+    <script>
+      // Pass the users from Django context to Vue.js
+      window.users = {{ users|safe }};
+    </script>
+
+    <!-- Static JS file -->
+    <script src="{% static 'chat_app/script.js' %}"></script>
+</body>
+</html>
