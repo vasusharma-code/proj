@@ -5,23 +5,27 @@ const LeftMenu = () => {
 
   return (
     <div
-      className={`bg-gray-100 p-4 border-r ${
+      className={`bg-gray-100 p-4 border-r shadow-lg ${
         collapsed ? "w-16" : "w-64"
-      } transition-all duration-300`}
+      } transition-all duration-500`}
     >
       <button
-        className="bg-blue-600 text-white px-4 py-2 rounded mb-4"
+        className="bg-blue-600 text-white px-4 py-2 rounded-full mb-4 transition-transform transform hover:scale-105"
         onClick={() => setCollapsed(!collapsed)}
       >
         {collapsed ? ">" : "<"}
       </button>
-      {!collapsed && (
-        <ul className="space-y-2">
-          <li className="p-2 hover:bg-blue-100 rounded">Menu Item 1</li>
-          <li className="p-2 hover:bg-blue-100 rounded">Menu Item 2</li>
-          <li className="p-2 hover:bg-blue-100 rounded">Menu Item 3</li>
-        </ul>
-      )}
+      <ul className={`space-y-4 ${collapsed && "hidden"}`}>
+        <li className="p-3 bg-gray-200 rounded-lg shadow hover:bg-blue-100 cursor-pointer">
+          Dashboard
+        </li>
+        <li className="p-3 bg-gray-200 rounded-lg shadow hover:bg-blue-100 cursor-pointer">
+          Settings
+        </li>
+        <li className="p-3 bg-gray-200 rounded-lg shadow hover:bg-blue-100 cursor-pointer">
+          Profile
+        </li>
+      </ul>
     </div>
   );
 };
